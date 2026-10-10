@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OneLevel — Instagram Abunəlik (AZ + EN)</title>
+<style>
+  :root {
+    --ig-yellow: #FEDA77;
+    --ig-orange: #FA7E1E;
+    --ig-magenta: #D62976;
+    --ig-purple: #962FBF;
+    --ig-blue: #4F5BD5;
+    --ig-gradient: linear-gradient(135deg, #FEDA77 0%, #FA7E1E 25%, #D62976 55%, #962FBF 80%, #4F5BD5 100%);
+    --indigo: #C13584;
+    --indigo-dark: #833AB4;
+    --dark: #262626;
+    --slate: #8E8E8E;
+    --light: #FAFAFA;
+    --line: #DBDBDB;
+    --green: #C13584;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--dark);
+    background: #F8FAFC;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    padding: 14mm 14mm 12mm;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Force a page break before the second sheet when printing */
+  .page + .page { page-break-before: always; break-before: page; }
+
+  .hero {
+    background: var(--ig-gradient);
+    color: #fff;
+    border-radius: 18px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 8px 24px rgba(214,41,118,0.28);
+  }
+  .lang-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.28);
+    border: 1px solid rgba(255,255,255,0.55);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .hero h1 { font-size: 25px; font-weight: 800; letter-spacing: -0.3px; text-shadow: 0 1px 2px rgba(0,0,0,0.18); }
+  .hero p { font-size: 13px; color: rgba(255,255,255,0.95); margin-top: 6px; max-width: 400px; }
+  .price-tag {
+    text-align: center;
+    background: rgba(255,255,255,0.22);
+    border: 1px solid rgba(255,255,255,0.55);
+    border-radius: 14px;
+    padding: 12px 18px;
+    flex-shrink: 0;
+    backdrop-filter: blur(2px);
+  }
+  .price-tag .amt { font-size: 30px; font-weight: 800; line-height: 1; }
+  .price-tag .per { font-size: 12px; color: rgba(255,255,255,0.95); margin-top: 4px; }
+  .handle { font-size: 12px; color: rgba(255,255,255,0.95); margin-top: 8px; font-weight: 600; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 20px 0 10px;
+    background: var(--ig-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+
+  .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .track {
+    background: var(--light);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    border-top: 3px solid transparent;
+    border-image: var(--ig-gradient) 1;
+  }
+  .track h3 { font-size: 15px; color: var(--indigo-dark); margin-bottom: 4px; }
+  .track .who { font-size: 11px; color: var(--slate); margin-bottom: 10px; }
+  .track ul { list-style: none; }
+  .track li { font-size: 12.5px; padding: 4px 0 4px 16px; position: relative; }
+  .track li::before { content: "•"; color: var(--ig-magenta); position: absolute; left: 2px; font-weight: 700; }
+
+  .perks { display: flex; flex-direction: column; gap: 7px; }
+  .perk {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    background: var(--light);
+    border: 1px solid var(--line);
+    border-left: 4px solid transparent;
+    border-image: var(--ig-gradient) 1;
+    border-radius: 9px;
+    padding: 9px 14px;
+  }
+  .perk .name { font-size: 12.5px; font-weight: 700; color: var(--dark); flex: 0 0 46%; }
+  .perk .name .free { color: var(--ig-magenta); font-weight: 800; }
+  .perk .desc { font-size: 11.5px; color: var(--slate); flex: 1; }
+
+  .cta {
+    margin-top: auto;
+    background: var(--dark);
+    color: #fff;
+    border-radius: 14px;
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .cta .msg { font-size: 13px; }
+  .cta .msg strong { color: #fff; }
+  .cta .link {
+    background: var(--ig-gradient);
+    color: #fff;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 11px 20px;
+    border-radius: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(214,41,118,0.4);
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- PAGE 1 — AZERBAIJANI -->
+  <div class="page">
+    <div class="hero">
+      <div>
+        <div class="lang-badge">🇦🇿 Azərbaycanca</div>
+        <h1>Instagram səhifəmə abunə ol</h1>
+        <p>Startap üçün istiqamət və texnologiya sahəsində karyera inkişafı — mənimlə birbaşa ünsiyyətlə.</p>
+        <div class="handle">📸 instagram.com/ulfathajiyev</div>
+      </div>
+      <div class="price-tag">
+        <div class="amt">$0.99</div>
+        <div class="per">ayda</div>
+      </div>
+    </div>
+
+    <div class="section-label">Hər abunəçiyə daxildir</div>
+    <div class="perks">
+      <div class="perk">
+        <div class="name">💬 İstənilən sualı ver</div>
+        <div class="desc">Real suallarını abunəçi qrup söhbətinə gətir — birbaşa məndən cavab al</div>
+      </div>
+      <div class="perk">
+        <div class="name">📅 Aylıq canlı görüşlər</div>
+        <div class="desc">Startap və karyera mövzularında səmimi qrup görüşləri; canlı olaraq əlavə sual ver</div>
+      </div>
+      <div class="perk">
+        <div class="name">📂 Eksklüziv materiallar</div>
+        <div class="desc">Yalnız abunəçilər üçün yüklənə bilən materiallar, şablonlar və resurslar</div>
+      </div>
+      <div class="perk">
+        <div class="name">👥 Abunəçi icması</div>
+        <div class="desc">Eyni məqsədə doğru gedən insanlardan ibarət icma — bu yolu tək getmirsən</div>
+      </div>
+      <div class="perk">
+        <div class="name">🤖 onelevel.co — standart paketə 50% endirim (ilk 3 ay)</div>
+        <div class="desc">Adətən ayda $19. Süni intellekt sənin əvəzinə iş müraciəti edir: CV-ni bir dəfə yüklə, hər gün 40.000+ şirkət arasında (Greenhouse, Lever, Ashby) uyğun vakansiyalar, CV hər vakansiyaya STAR formatında uyğunlaşdırılır, formalar doldurulub göndərilir, hər şey tək paneldən izlənir. <strong style="color:var(--dark)">Promo kodu almaq üçün mənə DM yaz.</strong></div>
+      </div>
+    </div>
+
+    <div class="section-label">Birə-bir xidmətlər — abunəçi endirimləri</div>
+    <div class="tracks">
+      <div class="track">
+        <h3>🚀 Startap mentorluğu — 50% endirim (ilk sessiya)</h3>
+        <div class="who">Adətən saatı $190. Xam ideyadan ilk müştərilərə qədər:</div>
+        <ul>
+          <li>İdeyanı yoxlamaq</li>
+          <li>İlk məhsulunu (MVP) hazırlamaq</li>
+          <li>İlk müştərilərini tapmaq</li>
+          <li>Erkən mərhələ tələlərindən qaçmaq</li>
+        </ul>
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--line); font-size:11px; color:var(--slate);">
+          Endirim üçün əvvəlcə <strong style="color:var(--dark)">DM yaz</strong>, sonra bron et:
+          <a href="https://onelevel.co/sessions/ulfathajiyev" style="color:var(--indigo-dark); font-weight:700; text-decoration:none">onelevel.co/sessions/ulfathajiyev</a>
+        </div>
+      </div>
+      <div class="track">
+        <h3>🎯 Karyera məsləhəti — 50% endirim (ilk sessiya)</h3>
+        <div class="who">Adətən saatı $130. <span style="color:var(--green);font-weight:600">onelevel.co pulsuz</span> daxildir. Əhatə edir:</div>
+        <ul>
+          <li>Uyğun imkanları seçmək</li>
+          <li>CV-ni təkmilləşdirmək</li>
+          <li>Müsahibəyə hazırlıq</li>
+          <li>Müraciət edərkən referans (tövsiyə) verilməsi</li>
+          <li>İşlədiyin yerdə inkişaf etmək</li>
+        </ul>
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--line); font-size:11px; color:var(--slate);">
+          Endirim üçün əvvəlcə <strong style="color:var(--dark)">DM yaz</strong>, sonra bron et:
+          <a href="https://onelevel.co/sessions/ulfathajiyev" style="color:var(--indigo-dark); font-weight:700; text-decoration:none">onelevel.co/sessions/ulfathajiyev</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="msg">
+        <strong>Necə qoşulmaq olar:</strong> Instagram profilimə keç → <strong>“Abunə ol”</strong> düyməsinə toxun → hazırsan.
+      </div>
+      <a class="link" href="https://instagram.com/ulfathajiyev" style="text-decoration:none">instagram.com/ulfathajiyev</a>
+    </div>
+  </div>
+
+  <!-- PAGE 2 — ENGLISH -->
+  <div class="page">
+    <div class="hero">
+      <div>
+        <div class="lang-badge">🇬🇧 English</div>
+        <h1>Subscribe to my Instagram page</h1>
+        <p>Startup guidance and tech career growth — with direct access to me.</p>
+        <div class="handle">📸 instagram.com/ulfathajiyev</div>
+      </div>
+      <div class="price-tag">
+        <div class="amt">$0.99</div>
+        <div class="per">per month</div>
+      </div>
+    </div>
+
+    <div class="section-label">Included for every subscriber</div>
+    <div class="perks">
+      <div class="perk">
+        <div class="name">💬 Ask me anything</div>
+        <div class="desc">Bring real questions to the subscriber group chat — direct answers from me</div>
+      </div>
+      <div class="perk">
+        <div class="name">📅 Monthly live sessions</div>
+        <div class="desc">Casual group calls on startup and career topics; ask follow-ups live</div>
+      </div>
+      <div class="perk">
+        <div class="name">📂 Exclusive materials</div>
+        <div class="desc">Downloadable content, templates, and resources only for subscribers</div>
+      </div>
+      <div class="perk">
+        <div class="name">👥 Subscriber community</div>
+        <div class="desc">A group working toward the same goals, so you are not doing it alone</div>
+      </div>
+      <div class="perk">
+        <div class="name">🤖 onelevel.co — 50% off standard package (first 3 months)</div>
+        <div class="desc">Normally $19/month. AI applies to jobs for you: upload CV once, daily matching across 40,000+ companies (Greenhouse, Lever, Ashby), CV tailored per role in STAR format, forms filled and submitted, all on one dashboard. <strong style="color:var(--dark)">DM me to get the promo code.</strong></div>
+      </div>
+    </div>
+
+    <div class="section-label">One-on-one services — subscriber discounts</div>
+    <div class="tracks">
+      <div class="track">
+        <h3>🚀 Startup mentorship — 50% off (1st session)</h3>
+        <div class="who">Normally $190/hour. From raw idea to first customers:</div>
+        <ul>
+          <li>Validating your idea</li>
+          <li>Building your first product (MVP)</li>
+          <li>Finding your first customers</li>
+          <li>Avoiding common early-stage traps</li>
+        </ul>
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--line); font-size:11px; color:var(--slate);">
+          For the discount, <strong style="color:var(--dark)">DM me first</strong>, then book:
+          <a href="https://onelevel.co/sessions/ulfathajiyev" style="color:var(--indigo-dark); font-weight:700; text-decoration:none">onelevel.co/sessions/ulfathajiyev</a>
+        </div>
+      </div>
+      <div class="track">
+        <h3>🎯 Career coaching — 50% off (1st session)</h3>
+        <div class="who">Normally $130/hour. Includes <span style="color:var(--green);font-weight:600">onelevel.co free</span>. Covers:</div>
+        <ul>
+          <li>Choosing the right opportunities</li>
+          <li>Improving your CV</li>
+          <li>Interview preparation</li>
+          <li>Providing references when you apply</li>
+          <li>Growing where you already work</li>
+        </ul>
+        <div style="margin-top:10px; padding-top:10px; border-top:1px solid var(--line); font-size:11px; color:var(--slate);">
+          For the discount, <strong style="color:var(--dark)">DM me first</strong>, then book:
+          <a href="https://onelevel.co/sessions/ulfathajiyev" style="color:var(--indigo-dark); font-weight:700; text-decoration:none">onelevel.co/sessions/ulfathajiyev</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="msg">
+        <strong>How to join:</strong> open my Instagram profile → tap <strong>“Subscribe”</strong> → you’re in.
+      </div>
+      <a class="link" href="https://instagram.com/ulfathajiyev" style="text-decoration:none">instagram.com/ulfathajiyev</a>
+    </div>
+  </div>
+
+</body>
+</html>
